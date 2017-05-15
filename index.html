@@ -4,6 +4,11 @@
     <meta charset="utf-8">
     <title>Angular Hello World</title>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
   </head>
   <body>
     <div ng-app="demoApp" ng-controller="mainController">
@@ -16,52 +21,5 @@
         <say-hello message="Hello"></say-hello>
       </div>
     </div>
-    <script>
-      var demoApp = angular.module("demoApp", []);
-
-      demoApp.controller("mainController", function($scope, userService){
-        $scope.users = userService.users();
-        $scope.newUser = {};  // initializing the variable to an empty hash
-        $scope.addUser = function() {
-          userService.add($scope.newUser);
-          $scope.newUser = {};
-        };
-      });
-
-      demoApp.directive("sayHello", function() {
-        return {
-          scope: false,  // used to say explicitly that there is no local scope only the global one
-          link: function($scope, element, attrs){
-            $scope.message = attrs.message;
-          },
-          template: "<h1>{{[message, user.firstName, user.lastName].join(' ')}}!</h1>"
-        };
-      });
-
-      demoApp.service('userService', function() {
-        var collection = [
-          {firstName: 'Thomas', lastName: 'Ochman'},
-          {firstName: 'Andy', lastName: 'Cool'},
-          {firstName: 'Raoul', lastName: 'Diffouo'}
-        ];
-        return {
-          users: function() {
-            return collection;
-          },
-          add: function(object) {
-            collection.push(object);
-          }
-        }
-      });
-
-      demoApp.filter('sortByFirstName', function() {
-        return function(array) {
-          function compare(a, b) {
-            return a.firstName.localeCompare(b.firstName)
-          };
-          return array.sort(compare);
-        };
-      });
-    </script>
   </body>
 </html>
