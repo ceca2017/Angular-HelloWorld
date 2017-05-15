@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Hello World</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-app="demoApp" ng-controller="mainController">
+      <h1>{{['Hello', firstName, lastName].join(' ')}}!</h1>
+    </div>
+
+    <script>
+      var demoApp = angular.module("demoApp", []);
+
+      demoApp.controller("mainController", function($scope){
+        $scope.firstName = "Thomas";
+        $scope.lastName = "Ochman";
+      });
+    </script>
+  </body>
+</html>
